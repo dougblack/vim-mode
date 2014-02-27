@@ -338,13 +338,3 @@ describe "Motions", ->
 
       it "moves the cursor to a specified line", ->
         expect(editor.getCursorScreenPosition()).toEqual [1, 4]
-
-  describe "the H keybinding", =>
-    beforeEach ->
-      editor.setText("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n")
-      editor.setCursorScreenPosition([0, 0])
-
-    describe "as a motion", ->
-      beforeEach -> keydown('H', shift: true)
-      it "moves the cursor to the top of the current minus offset", ->
-        expect(editor.getCursorScreenPosition()).toEqual [0, 0]

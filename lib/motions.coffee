@@ -255,23 +255,32 @@ class MoveToStartOfFile extends MoveToLine
     super(count)
 
 class MoveToTopOfScreen extends MoveToLine
+  constructor: (@editor, @editorView) ->
+    super
+
   execute: (count) ->
-    firstScreenRow = atom.workspaceView.getActiveView().getFirstVisibleScreenRow()
+    firstScreenRow = @editorView.getFirstVisibleScreenRow()
     destRow = if firstScreenRow != 0 then firstScreenRow + 3 else 0
     super(destRow)
 
 class MoveToBottomOfScreen extends MoveToLine
+  constructor: (@editor, @editorView) ->
+    super
+
   execute: (count) ->
-    lastScreenRow = atom.workspaceView.getActiveView().getLastVisibleScreenRow()
+    lastScreenRow = @editorView.getLastVisibleScreenRow()
+    console.log(lastScreenRow)
     lastRow = @editor.getBuffer().getLastRow()
-    destRow = if lastRow != lastScreenRow then lastScreenRow - 1 else lastRow
+    destRow = if lastRow != lastScreenRow then lastScreenRow - 1 else lastRow + 1
     super(destRow)
 
 class MoveToMiddleOfScreen extends MoveToLine
+  constructor: (@editor, @editorView) ->
+    super
+
   execute: (count) ->
-    activeView = atom.workspaceView.getActiveView()
-    firstScreenRow = activeView.getFirstVisibleScreenRow()
-    lastScreenRow = activeView.getLastVisibleScreenRow()
+    firstScreenRow = @editorView.getFirstVisibleScreenRow()
+    lastScreenRow = @editorView.getLastVisibleScreenRow()
     height = lastScreenRow - firstScreenRow
     middleScreenRow = Math.floor(firstScreenRow + (height / 2))
     super(middleScreenRow)
