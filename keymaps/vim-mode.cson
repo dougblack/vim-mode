@@ -77,6 +77,8 @@
   # '0': 'vim-mode:move-to-beginning-of-line'
   'g g': 'vim-mode:move-to-start-of-file'
   'G': 'vim-mode:move-to-line'
+  'L': 'vim-mode:move-to-last-line-of-screen'
+  'H': 'vim-mode:move-to-first-line-of-screen'
   'escape': 'vim-mode:reset-command-mode'
   'u': 'core:undo'
   'ctrl-r': 'core:redo'

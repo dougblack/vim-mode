@@ -87,7 +87,7 @@ describe "Motions", ->
 
         # FIXME: The definition of Cursor#getEndOfCurrentWordBufferPosition,
         # means that the end of the word can't be the current cursor
-        # position (even though it is when you're cursor is on a new line).
+        # position (even though it is when your cursor is on a new line).
         #
         # Therefore it picks the end of the next word here (which is [3,3])
         # to start looking for the next word, which is also the end of the
@@ -338,3 +338,13 @@ describe "Motions", ->
 
       it "moves the cursor to a specified line", ->
         expect(editor.getCursorScreenPosition()).toEqual [1, 4]
+
+  describe "the H keybinding", =>
+    beforeEach ->
+      editor.setText("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n")
+      editor.setCursorScreenPosition([0, 0])
+
+    describe "as a motion", ->
+      beforeEach -> keydown('H', shift: true)
+      it "moves the cursor to the top of the current minus offset", ->
+        expect(editor.getCursorScreenPosition()).toEqual [0, 0]

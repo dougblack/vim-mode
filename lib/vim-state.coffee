@@ -106,6 +106,8 @@ class VimState
       'move-to-beginning-of-line': => new motions.MoveToBeginningOfLine(@editor)
       'move-to-start-of-file': => new motions.MoveToStartOfFile(@editor)
       'move-to-line': => new motions.MoveToLine(@editor)
+      'move-to-last-line-of-screen': => new motions.MoveToLastLineOfScreen(@editor)
+      'move-to-first-line-of-screen': => new motions.MoveToFirstLineOfScreen(@editor)
       'register-prefix': (e) => @registerPrefix(e)
       'repeat-prefix': (e) => @repeatPrefix(e)
       'repeat': (e) => new operators.Repeat(@editor, @)
