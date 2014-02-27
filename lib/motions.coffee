@@ -254,33 +254,21 @@ class MoveToStartOfFile extends MoveToLine
   execute: (count=1) ->
     super(count)
 
-class MoveToLastLineOfScreen extends MoveToLine
+class MoveToTopOfScreen extends MoveToLine
+  execute: (count) ->
+    firstScreenRow = atom.workspaceView.getActiveView().getFirstVisibleScreenRow()
+    destRow = if firstScreenRow != 0 then firstScreenRow + 3 else 0
+    super(destRow)
+
+class MoveToBottomOfScreen extends MoveToLine
   execute: (count) ->
     lastScreenRow = atom.workspaceView.getActiveView().getLastVisibleScreenRow()
     lastRow = @editor.getBuffer().getLastRow()
-    destRow = if lastRow != lastScreenRow then lastScreenRow - 3 else lastScreenRow
-    @editor.setCursorScreenPosition([destRow, 0])
-    @editor.getCursor().skipLeadingWhitespace()
-
-  select: (count=1) ->
-    _times count, ->
-      lastRow = atom.workspaceView.getActiveView().getLastVisibleScreenRow()
-      @editor.selectToScreenPosition([lastRow - 2, 0])
-      true
-
-class MoveToFirstLineOfScreen extends MoveToLine
-  execute: (count) ->
-    firstRow = atom.workspaceView.getActiveView().getFirstVisibleScreenRow()
-    destRow = if firstRow < 4 then firstRow else firstRow + 3
-    @editor.setCursorScreenPosition([destRow, 0])
-    @editor.getCursor().skipLeadingWhitespace()
-
-  select: (count=1) ->
-    _times count, ->
-      true
+    destRow = if lastRow != lastScreenRow then lastScreenRow - 1 else lastRow
+    super(destRow)
 
 module.exports = { Motion, CurrentSelection, SelectLeft, SelectRight, MoveLeft,
   MoveRight, MoveUp, MoveDown, MoveToPreviousWord, MoveToNextWord,
   MoveToEndOfWord, MoveToNextParagraph, MoveToLine, MoveToBeginningOfLine,
   MoveToFirstCharacterOfLine, MoveToLastCharacterOfLine, MoveToStartOfFile,
-  MoveToLastLineOfScreen, MoveToFirstLineOfScreen}
+  MoveToBottomOfScreen, MoveToTopOfScreen}
