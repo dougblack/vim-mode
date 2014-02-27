@@ -108,6 +108,7 @@ class VimState
       'move-to-line': => new motions.MoveToLine(@editor)
       'move-to-top-of-screen': => new motions.MoveToTopOfScreen(@editor)
       'move-to-bottom-of-screen': => new motions.MoveToBottomOfScreen(@editor)
+      'move-to-middle-of-screen': => new motions.MoveToMiddleOfScreen(@editor)
       'register-prefix': (e) => @registerPrefix(e)
       'repeat-prefix': (e) => @repeatPrefix(e)
       'repeat': (e) => new operators.Repeat(@editor, @)

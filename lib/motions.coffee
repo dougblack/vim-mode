@@ -267,8 +267,17 @@ class MoveToBottomOfScreen extends MoveToLine
     destRow = if lastRow != lastScreenRow then lastScreenRow - 1 else lastRow
     super(destRow)
 
+class MoveToMiddleOfScreen extends MoveToLine
+  execute: (count) ->
+    activeView = atom.workspaceView.getActiveView()
+    firstScreenRow = activeView.getFirstVisibleScreenRow()
+    lastScreenRow = activeView.getLastVisibleScreenRow()
+    height = lastScreenRow - firstScreenRow
+    middleScreenRow = Math.floor(firstScreenRow + (height / 2))
+    super(middleScreenRow)
+
 module.exports = { Motion, CurrentSelection, SelectLeft, SelectRight, MoveLeft,
   MoveRight, MoveUp, MoveDown, MoveToPreviousWord, MoveToNextWord,
   MoveToEndOfWord, MoveToNextParagraph, MoveToLine, MoveToBeginningOfLine,
   MoveToFirstCharacterOfLine, MoveToLastCharacterOfLine, MoveToStartOfFile,
-  MoveToBottomOfScreen, MoveToTopOfScreen}
+  MoveToTopOfScreen, MoveToBottomOfScreen, MoveToMiddleOfScreen }
